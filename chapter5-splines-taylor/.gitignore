@@ -1,0 +1,13 @@
+input/**/*.asd.txt
+input/**/*.asd.rad.txt
+paper/figures/**
+main.plot
+paper.plot
+figures/
+output/*/*
+
+!output/lab_diffs/hot_colormap.png
+!output/colorimgdiff.exe
+!output/gen_avg_delta_e.py
+!output/gen_lab_diffs.bat
+!output/gen_lab_diffs_bat.py

@@ -1,0 +1,67 @@
+\renewcommand{\relativeerrorcell}[2]{%
+\begin{overpic}[width=\my_img_width \mytablewidth]{relative_error_#2_#1}
+\put(5,5){\footnotesize\input{../output/figures/error_#2_#1.txt}}
+\end{overpic}}
+
+\renewcommand{\relativeerrorrow}[1]{
+\rotatebox{90}{\footnotesize #1 / 
+\input{../output/figures/sza_#1.txt}\unskip\degree} &
+\relativeerrorcell{nishita93}{#1} &
+\relativeerrorcell{nishita96}{#1} &
+\relativeerrorcell{preetham}{#1} &
+\relativeerrorcell{oneal}{#1} &
+\relativeerrorcell{haber}{#1} &
+\relativeerrorcell{bruneton}{#1} &
+\relativeerrorcell{elek}{#1} &
+\relativeerrorcell{hosek}{#1} &
+\relativeerrorcell{trapezoidal}{#1} &
+\relativeerrorcell{spline}{#1} &
+\relativeerrorcell{taylor}{#1} &
+\relativeerrorcell{libradtran}{#1}}
+
+\renewcommand{\relativeerrortable}[2]{
+\begin{longtable}{p{0.04\mytablewidth}*{13}{p{\my_img_width \mytablewidth}}}
+\caption*{#1}\\
+&
+\footnotesize\bfseries Nishita93 &
+\footnotesize\bfseries Nishita96 &
+\footnotesize\bfseries Preetham &
+\footnotesize\bfseries O'Neal &
+\footnotesize\bfseries Haber &
+\footnotesize\bfseries Bruneton &
+\footnotesize\bfseries Elek &
+\footnotesize\bfseries Hosek &
+\footnotesize\bfseries Trapezoidal &
+\footnotesize\bfseries Spline &
+\footnotesize\bfseries Taylor &
+\footnotesize\bfseries\leavevmode\color{blue} libRadtran\vspace{1mm}\\
+\supplemental{\relativeerrorrow{09h30}\\}
+\supplemental{\relativeerrorrow{09h45}\\}
+\supplemental{\relativeerrorrow{10h00}\\}
+\relativeerrorrow{10h15}\\
+\supplemental{\relativeerrorrow{10h30}\\}
+\supplemental{\relativeerrorrow{10h45}\\}
+\supplemental{\relativeerrorrow{11h00}\\}
+\relativeerrorrow{11h15}\\
+\supplemental{\relativeerrorrow{11h30}\\}
+\supplemental{\relativeerrorrow{11h45}\\}
+\supplemental{\relativeerrorrow{12h00}\\}
+\supplemental{\relativeerrorrow{12h15}\\}
+\supplemental{\relativeerrorrow{12h30}\\}
+\supplemental{\relativeerrorrow{12h45}\\}
+\supplemental{\relativeerrorrow{13h00}\\}
+\relativeerrorrow{13h15}\\
+\supplemental{\relativeerrorrow{13h30}\\}
+\multicolumn{14}{c}{#2}
+\end{longtable}}
+
+\relativeerrortable{%
+{\bf Relative error}. The relative error compared with the
+measurements, in \% and using the same color scale as in~\cite{Kider2014},
+computed at the 81 sampling points (and summed equally over the common range
+supported by all models, i.e. between $360$ and $720\,nm$), and then
+interpolated with spherical bicubic interpolation. The bottom left number is the
+RMSE in $mW/(m^2.sr.nm)$ (computed over the 81 sampling points and all the
+wavelengths between $360$ and $720\,nm$).\label{fig:relative_error}}
+{\includegraphics[width=1.5\mytablewidth]{error_caption}\vspace{-0.5cm}}
+

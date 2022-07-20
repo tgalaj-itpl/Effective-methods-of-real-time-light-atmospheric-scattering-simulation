@@ -1,0 +1,67 @@
+\def \myuserstudyimgwidth {0.45}
+
+\newcommand{\userstudyrow}[1]{
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_nishita93}&
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_nishita96}&
+%\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_preetham}&
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_oneal}&
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_haber}&
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_bruneton}&
+\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_elek}
+%\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_hosek}
+}
+
+\newcommand{\userstudy}{
+\setlength{\tabcolsep}{0cm}
+\renewcommand\arraystretch{0}
+\LTcapwidth=\textwidth
+\begin{longtable}{*{6}{p{\myuserstudyimgwidth\mytablewidth}}}
+\caption*{{\bf Examplary rendered viewpoints from the ground level}. The images were generated for each model for different daytimes (i.e. late afternoon - top, morning - bottom).\label{fig:userstudy}}\\
+
+\footnotesize\bfseries Nishita93 &
+\footnotesize\bfseries Nishita96 &
+%\footnotesize\bfseries Preetham &
+\footnotesize\bfseries O'Neal &
+\footnotesize\bfseries Haber &
+\footnotesize\bfseries Bruneton &
+\footnotesize\bfseries Elek 
+%\footnotesize\bfseries Hosek 
+\vspace{1mm} \\ 
+\userstudyrow{sunrise}\\
+\userstudyrow{morning}
+\end{longtable}
+}
+
+%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\userstudyroww}[1]{
+	\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_trapezoidal}&
+	\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_spline} &
+	\includegraphics[width=\myuserstudyimgwidth\mytablewidth]{sky_image_#1_taylor} 
+}
+
+\newcommand{\userstudyy}{
+	\setlength{\tabcolsep}{0cm}
+	\renewcommand\arraystretch{0}
+	\LTcapwidth=\textwidth
+	\begin{longtable}{*{6}{p{\myuserstudyimgwidth\mytablewidth}}}
+		\caption*{}\\
+		\footnotesize\bfseries Trapezoidal &
+		\footnotesize\bfseries Spline &
+		\footnotesize\bfseries Taylor
+		\vspace{1mm} \\ 
+		\userstudyroww{sunrise}\\
+		\userstudyroww{morning}
+	\end{longtable}
+}
+
+\begin{landscape}
+	\parbox[c][\textwidth][s]{\linewidth}{%
+		%\vfill
+		
+		\userstudy
+		\userstudyy
+		
+		\vfill}
+\end{landscape}
+

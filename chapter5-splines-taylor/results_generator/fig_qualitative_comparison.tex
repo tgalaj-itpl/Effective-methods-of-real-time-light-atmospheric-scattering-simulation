@@ -1,0 +1,63 @@
+\begin{table*}[ht!]
+\renewcommand{\arraystretch}{1.3}
+\caption{{\bf Qualitative comparison}. Summary of the qualitive evaluation of
+the 8 clear sky models. The precomputation time and memory complexity for the
+Haber and Nishita96 models is for a single Sun zenith angle $\theta_s$ only --
+the Bruneton and Elek models precomputations are for $n$ such angles and the
+Nishita93 precomputations are independent of $\theta_s$.}
+\label{fig:qualitative_comparison}
+\centering
+\begin{tabular}{|r||c|c|c|c|c|c|c|c|c|}
+\hline
+\bfseries & \bfseries Supported & \bfseries Aerial & \bfseries Sunset &
+\bfseries Scattering & \bfseries Precompute & \bfseries Precompute &
+\bfseries Render & \bfseries RMSE & \bfseries Delta E \\
+\bfseries Model & \bfseries viewpoints & \bfseries perspective & \bfseries
+sunrise & \bfseries orders & \bfseries time & \bfseries memory & \bfseries time
+& \bfseries $mW/(m^2.sr.nm)$ & \bfseries error \\
+\hline
+Nishita93 & all & yes & yes & 1 & $O(n^3)$ & $O(n^2)$ & $O(n)$ &
+\input{../output/figures/error_total_nishita93.txt} &
+\input{../output/lab_diffs/lab_diff_nishita93_avg_delta_e.txt} \\
+\hline
+Nishita96 & in atmosphere & yes & yes & 2 & $O(n^3)$ & $O(n^3)$ & $O(n)$ &
+\input{../output/figures/error_total_nishita96.txt} &
+\input{../output/lab_diffs/lab_diff_nishita96_avg_delta_e.txt} \\
+\hline
+%Preetham & ground only & yes & no & 2 & $0$ & $0$ & $O(1)$ &
+%\input{../output/figures/error_total_preetham.txt} \\
+%\hline
+O'Neal & all & yes & yes & $1$ & $0$ & $0$ & $O(n)$ &
+\input{../output/figures/error_total_oneal.txt} &
+\input{../output/lab_diffs/lab_diff_oneal_avg_delta_e.txt} \\
+\hline
+Haber & ground only & yes & yes & all & $O(n^6)$ & $O(n^3)$ & $O(n^2)$ &
+\input{../output/figures/error_total_haber.txt} &
+\input{../output/lab_diffs/lab_diff_haber_avg_delta_e.txt} \\
+\hline
+Bruneton & all & yes & yes & all & $O(n^6)$ & $O(n^4)$ & $O(1)$ &
+\input{../output/figures/error_total_bruneton.txt} &
+\input{../output/lab_diffs/lab_diff_bruneton_avg_delta_e.txt} \\
+\hline
+Elek & all & yes & yes & all & $O(n^6)$ & $O(n^4)$ & $O(1)$ &
+\input{../output/figures/error_total_elek.txt} &
+\input{../output/lab_diffs/lab_diff_elek_avg_delta_e.txt} \\
+\hline
+Hosek & ground only & no & no & all & $0$ & $0$ & $O(1)$ &
+\input{../output/figures/error_total_hosek.txt} \\
+\hline
+Trapezoidal & all & yes & yes & 1 & $0$ & $0$ & $O(n^2)$ &
+\input{../output/figures/error_total_trapezoidal.txt} &
+\input{../output/lab_diffs/lab_diff_trapezoidal_avg_delta_e.txt} \\
+\hline
+Spline & all & yes & yes & 1 & n/a & n/a & $O(n)$ &
+\input{../output/figures/error_total_spline.txt} &
+\input{../output/lab_diffs/lab_diff_spline_avg_delta_e.txt} \\
+\hline
+Taylor & all & yes & yes & 1 & n/a & n/a & $O(n)$ &
+\input{../output/figures/error_total_taylor.txt} &
+\input{../output/lab_diffs/lab_diff_taylor_avg_delta_e.txt} \\
+\hline
+\end{tabular}
+\end{table*}
+

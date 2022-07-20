@@ -1,0 +1,62 @@
+\newcommand{\relativeerrorcell}[2]{%
+\begin{overpic}[width=\my_img_width \mytablewidth]{../output/lab_diffs/lab_diff_#2_#1}
+\put(5,5){\footnotesize\textcolor{white}{\input{../output/lab_diffs/lab_diff_#2_#1_delta_e.txt}}}
+\end{overpic}}
+
+\newcommand{\relativeerrorrow}[1]{
+\rotatebox{90}{\footnotesize #1 / 
+\input{../output/figures/sza_#1.txt}\unskip\degree} &
+\relativeerrorcell{nishita93}{#1} &
+\relativeerrorcell{nishita96}{#1} &
+%\relativeerrorcell{preetham}{#1} &
+\relativeerrorcell{oneal}{#1} &
+\relativeerrorcell{haber}{#1} &
+\relativeerrorcell{bruneton}{#1} &
+\relativeerrorcell{elek}{#1} &
+%\relativeerrorcell{hosek}{#1} &
+\relativeerrorcell{trapezoidal}{#1} &
+\relativeerrorcell{spline}{#1} &
+\relativeerrorcell{taylor}{#1} &
+\relativeerrorcell{libradtran}{#1}}
+
+\newcommand{\relativeerrortable}[2]{
+\begin{longtable}{p{0.04\mytablewidth}*{13}{p{\my_img_width \mytablewidth}}}
+\caption*{#1}\\
+&
+\footnotesize\bfseries Nishita93 &
+\footnotesize\bfseries Nishita96 &
+%\footnotesize\bfseries Preetham &
+\footnotesize\bfseries O'Neal &
+\footnotesize\bfseries Haber &
+\footnotesize\bfseries Bruneton &
+\footnotesize\bfseries Elek &
+%\footnotesize\bfseries Hosek &
+\footnotesize\bfseries Trapezoidal &
+\footnotesize\bfseries Spline &
+\footnotesize\bfseries Taylor &
+\footnotesize\bfseries\leavevmode\color{blue} libRadtran\vspace{1mm}\\
+\supplemental{\relativeerrorrow{09h30}\\}
+\supplemental{\relativeerrorrow{09h45}\\}
+\supplemental{\relativeerrorrow{10h00}\\}
+\relativeerrorrow{10h15}\\
+\supplemental{\relativeerrorrow{10h30}\\}
+\supplemental{\relativeerrorrow{10h45}\\}
+\supplemental{\relativeerrorrow{11h00}\\}
+\relativeerrorrow{11h15}\\
+\supplemental{\relativeerrorrow{11h30}\\}
+\supplemental{\relativeerrorrow{11h45}\\}
+\supplemental{\relativeerrorrow{12h00}\\}
+\supplemental{\relativeerrorrow{12h15}\\}
+\supplemental{\relativeerrorrow{12h30}\\}
+\supplemental{\relativeerrorrow{12h45}\\}
+\supplemental{\relativeerrorrow{13h00}\\}
+\relativeerrorrow{13h15}\\
+\supplemental{\relativeerrorrow{13h30}\\}
+\vspace{0.2cm}\\
+\multicolumn{14}{c}{#2}
+\end{longtable}}
+
+\relativeerrortable{%
+{\bf Delta E error}. The Delta E difference (per pixel) computed in CIE L*a*b* space.\label{fig:relative_lab_error}}
+{\includegraphics[width=1.5\mytablewidth, height=0.3cm, frame]{../output/lab_diffs/hot_colormap}}
+

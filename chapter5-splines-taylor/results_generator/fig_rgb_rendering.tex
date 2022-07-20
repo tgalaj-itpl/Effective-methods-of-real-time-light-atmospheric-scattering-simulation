@@ -1,0 +1,79 @@
+\newcommand{\rgbrenderingcell}[6]{
+\begin{overpic}[width=0.198\columnwidth]{image_#3_#2_#1}
+\ifthenelse{\equal{#1}{measurements}}{
+  %
+}{
+  \put(5,5){\footnotesize\color{white}%
+    \input{program/output/figures/error_#4_#2_#1.txt}}
+}
+\ifthenelse{\equal{#5}{true}}{
+  \put(82,85){\footnotesize\color{white}#6}
+}{
+  %
+}
+\end{overpic}}
+
+\newcommand{\rgbrenderingrow}[4]{
+\rgbrenderingcell{nishita93}{#1}{#2}{#3}{#4}{\hspace{1.4mm}3} &
+\rgbrenderingcell{nishita96}{#1}{#2}{#3}{#4}{\hspace{1.4mm}3} &
+\rgbrenderingcell{preetham}{#1}{#2}{#3}{#4}{\hspace{1.4mm}3} &
+\rgbrenderingcell{oneal}{#1}{#2}{#3}{#4}{\hspace{1.4mm}3} &
+\rgbrenderingcell{haber}{#1}{#2}{#3}{#4}{\hspace{1.4mm}8} &
+\rgbrenderingcell{bruneton}{#1}{#2}{#3}{#4}{\hspace{1.4mm}3} &
+\rgbrenderingcell{elek}{#1}{#2}{#3}{#4}{15} &
+\rgbrenderingcell{hosek}{#1}{#2}{#3}{#4}{11} &
+\rgbrenderingcell{libradtran}{#1}{#2}{#3}{#4}{40} &
+\rgbrenderingcell{measurements}{#1}{#2}{#3}{#4}{40}}
+
+\newcommand{\rgbdiffcell}[2]{
+\begin{overpic}[width=0.198\columnwidth]{image_approx_diff_#2_#1}
+\put(5,5){\footnotesize\color{white}%
+  \input{program/output/figures/image_approx_psnr_#2_#1.txt}dB}
+\end{overpic}}
+
+\newcommand{\rgbdiffrow}[1]{
+\rgbdiffcell{nishita93}{#1} & 
+\rgbdiffcell{nishita96}{#1} &
+\rgbdiffcell{preetham}{#1} &
+\rgbdiffcell{oneal}{#1} &
+\rgbdiffcell{haber}{#1} &
+\rgbdiffcell{bruneton}{#1} &
+\rgbdiffcell{elek}{#1} &
+\rgbdiffcell{hosek}{#1} &
+\rgbdiffcell{libradtran}{#1} &
+\rgbdiffcell{measurements}{#1}}
+
+\begin{figure*}
+\begin{center}
+\begin{mytabular}{p{0.04\columnwidth}*{10}{p{0.198\columnwidth}}}
+&
+\footnotesize\bfseries Nishita93 &
+\footnotesize\bfseries Nishita96 &
+\footnotesize\bfseries Preetham &
+\footnotesize\bfseries O'Neal &
+\footnotesize\bfseries Haber &
+\footnotesize\bfseries Bruneton &
+\footnotesize\bfseries Elek &
+\footnotesize\bfseries Hosek &
+\footnotesize\bfseries\leavevmode\color{blue} libRadtran &
+\footnotesize\bfseries\leavevmode\color{red} Measurements\vspace{1mm}\\
+\rotatebox{90}{\footnotesize original} & 
+\rgbrenderingrow{10h15}{original}{original_rgb}{true}\\
+\rotatebox{90}{\footnotesize \cref{eq:spectraltorgb}} & 
+\rgbrenderingrow{10h15}{full_spectral}{rgb}{false}\\
+\rotatebox{90}{\footnotesize \cref{eq:rgb}} & 
+\rgbrenderingrow{10h15}{approx_spectral}{approximate_rgb}{false}\\
+\rotatebox{90}{\footnotesize $10|\mathrm{(1)}-\mathrm{(2)}|$} &
+\rgbdiffrow{10h15}
+\end{mytabular}
+\end{center}
+\caption{{\bf Spectrum sampling}. Rendering of the skydome by using the number
+of wavelengths $n_\lambda$ proposed by the authors of each model (1st row,
+$n_\lambda$ in the top right), by using $n_\lambda=40$ and
+\cref{eq:spectraltorgb} (2nd row), and by using $n_\lambda=3$ and \cref{eq:rgb}
+(3rd row). The bottom left number in each cell is the RMSE, times 1000, compared
+to the top right cell (summed over the 81 measurement samples, on the RGB colors
+tone-mapped to the $[0,1]$ interval). The 4th row is the difference between the
+2nd and 3rd ones, times 10, with the corresponding peak signal to noise ratio
+(PSNR).}\label{fig:rgb_rendering}
+\end{figure*}

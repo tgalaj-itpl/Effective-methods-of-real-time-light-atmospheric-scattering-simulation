@@ -1,0 +1,49 @@
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.3}
+\caption{{\bf Spectrum sampling}. The RMSE in $mW/(m^2.sr.nm)$, summed over the
+17 daytimes, 81 directions, and $\lambda$ from $360$ to $720\,nm$. {\em Left}:
+spectral radiance computed separately for each wavelength. {\em Right}:
+approximate spectrum reconstructed from 3 spectral radiance computations.}
+\label{fig:approx_spectral}
+\centering
+\begin{tabular}{|r||c|c|c|c|c|c|c|c|}
+\hline
+\bfseries & \bfseries Full spectrum & \bfseries Reconstruction \\
+\bfseries Model & \bfseries computation & \bfseries from 3 samples \\
+\hline
+Nishita93 & \input{../output/figures/error_total_nishita93.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_nishita93.txt} \\
+\hline
+Nishita96 & \input{../output/figures/error_total_nishita96.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_nishita96.txt} \\
+\hline
+Preetham & \input{../output/figures/error_total_preetham.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_preetham.txt} \\
+\hline
+O'Neal & \input{../output/figures/error_total_oneal.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_oneal.txt} \\
+\hline
+Haber & \input{../output/figures/error_total_haber.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_haber.txt} \\
+\hline
+Bruneton & \input{../output/figures/error_total_bruneton.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_bruneton.txt} \\
+\hline
+Elek & \input{../output/figures/error_total_elek.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_elek.txt} \\
+\hline
+Hosek & \input{../output/figures/error_total_hosek.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_hosek.txt} \\
+\hline
+Trapezoidal & \input{../output/figures/error_total_trapezoidal.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_trapezoidal.txt} \\
+\hline
+Spline & \input{../output/figures/error_total_spline.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_spline.txt} \\
+\hline
+Taylor & \input{../output/figures/error_total_taylor.txt} &
+\input{../output/figures/error_total_with_approximate_spectrum_taylor.txt} \\
+\hline
+\end{tabular}
+\end{table}
+

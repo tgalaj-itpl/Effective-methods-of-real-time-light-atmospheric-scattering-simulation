@@ -1,0 +1,74 @@
+\def \my_img_width {0.16} % 1.98/12 = 0.165
+\newcommand{\modelrow}[2]{
+\rotatebox{90}{\footnotesize #2 /
+\input{../output/figures/sza_#2.txt}\unskip\degree} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_nishita93} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_nishita96} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_preetham} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_oneal} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_haber} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_bruneton} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_elek} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_hosek} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_trapezoidal} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_spline} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_taylor} &
+\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_libradtran} &
+\ifthenelse{\equal{#2}{06h00} \OR \equal{#2}{07h00} \OR \equal{#2}{08h00}}
+{\raisebox{0.091\mytablewidth}{\makebox[\my_img_width \mytablewidth]{\footnotesize n/a}}}
+{\includegraphics[width=\my_img_width \mytablewidth]{#1_#2_measurements}}}
+
+\newcommand{\modeltable}[3]{
+\setlength{\tabcolsep}{0cm}
+\renewcommand\arraystretch{0}
+\LTcapwidth=\textwidth
+\begin{longtable}{p{0.04\mytablewidth}*{14}{p{\my_img_width \mytablewidth}}}
+\caption*{#2}\\
+&
+\footnotesize\bfseries Nishita93 &
+\footnotesize\bfseries Nishita96 &
+\footnotesize\bfseries Preetham &
+\footnotesize\bfseries O'Neal &
+\footnotesize\bfseries Haber &
+\footnotesize\bfseries Bruneton &
+\footnotesize\bfseries Elek &
+\footnotesize\bfseries Hosek &
+\footnotesize\bfseries Trapezoidal &
+\footnotesize\bfseries\leavevmode\color{violet} Spline &
+\footnotesize\bfseries\leavevmode\color{orange} Taylor &
+\footnotesize\bfseries\leavevmode\color{blue} libRadtran &
+\footnotesize\bfseries\leavevmode\color{red} Measurements\vspace{1mm}\\
+\modelrow{#1}{06h00}\\
+\supplemental{\modelrow{#1}{07h00}\\}
+\supplemental{\modelrow{#1}{08h00}\\}
+\supplemental{\modelrow{#1}{09h30}\\}
+\supplemental{\modelrow{#1}{09h45}\\}
+\supplemental{\modelrow{#1}{10h00}\\}
+\modelrow{#1}{10h15}\\
+\supplemental{\modelrow{#1}{10h30}\\}
+\supplemental{\modelrow{#1}{10h45}\\}
+\supplemental{\modelrow{#1}{11h00}\\}
+\modelrow{#1}{11h15}\\
+\supplemental{\modelrow{#1}{11h30}\\}
+\supplemental{\modelrow{#1}{11h45}\\}
+\supplemental{\modelrow{#1}{12h00}\\}
+\supplemental{\modelrow{#1}{12h15}\\}
+\supplemental{\modelrow{#1}{12h30}\\}
+\supplemental{\modelrow{#1}{12h45}\\}
+\supplemental{\modelrow{#1}{13h00}\\}
+\modelrow{#1}{13h15}\\
+\supplemental{\modelrow{#1}{13h30}\\}
+\multicolumn{15}{c}{#3}
+\end{longtable}
+}
+
+%\myfigure{\modeltable{image_full_spectral}}
+\modeltable{image_full_spectral}{%
+{\bf Rendering}. Fisheye skydome rendering of the spectral radiance
+obtained with each model, convolved with the CIE color matching functions,
+converted from XYZ to linear sRGB, and tone mapped with $1-e^{-kL}$, for several
+time of day / sun zenith angle values (the red cross indicates the sun
+direction). The measurements are interpolated using bicubic spherical
+interpolation before rendering. Compare with Fig. 13
+in\cite{Kider2014}.\label{fig:rendering}}{\ignorespaces}
+
