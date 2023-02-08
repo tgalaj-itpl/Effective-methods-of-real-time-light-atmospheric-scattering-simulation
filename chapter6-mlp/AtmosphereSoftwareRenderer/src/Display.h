@@ -8,7 +8,7 @@
 class Display
 {
 public:
-    Display(size_t width, size_t height, std::string title);
+    Display(size_t width, size_t height, std::string title, uint32_t window_sdl_flags = 0);
     ~Display();
 
     void swapBuffers();

@@ -14,10 +14,7 @@ public:
 
 private:
     std::vector<IntegrationData> integrator(Ray ray, double a, double b, unsigned n, bool precomptute) override;
-
-    //keras2cpp::Model m_neural_network = keras2cpp::Model::load("res/nn_lut_512_128_128_128_128_rm_earth_3layers-186.model");
     keras2cpp::Model m_neural_network = keras2cpp::Model::load("res/nn_lut_512_128_128_128_128_rm_earth_10layers-587.model");
-    //keras2cpp::Model m_neural_network = keras2cpp::Model::load("res/nn_lut_512_128_128_128_128_rm_multi_planets-100.model");
     Options m_opt;
 };
 

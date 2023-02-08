@@ -62,22 +62,10 @@ glm::highp_dvec3 DeepAS::computeIncidentLight(const Ray & ray, double t_min, dou
     double view_angle = glm::acos(glm::dot(glm::normalize(P_v), R_v));
     double sun_angle  = glm::acos(glm::dot(glm::normalize(P_v), sun_light));
     double height     = sampleHeight(P_v);
-    
-#if 1 // single planet
+
     auto in = keras2cpp::Tensor{ 3 };
     in.data_ = { float(height / (atmosphere_radius - planet_radius)), float(sun_angle / glm::pi<double>()), float(view_angle / glm::pi<double>()) };
-#else //multi planets
-    constexpr float max_planet_radius = 6360e3f;
-    constexpr float planet_radius = 6360e3f;
-    constexpr float atmo_radius = planet_radius + 100e3;
 
-    auto in = keras2cpp::Tensor{ 5 };
-    in.data_ = { float(height / (atmosphere_radius - planet_radius)), 
-                 float(sun_angle / glm::pi<double>()), 
-                 float(view_angle / glm::pi<double>()),
-                 planet_radius / max_planet_radius,
-                 atmo_radius / max_planet_radius};
-#endif
     auto out = m_neural_network(in);
 
     auto intensity_rayleigh = glm::highp_dvec4(out.data_[0], out.data_[1], out.data_[2], out.data_[3]);

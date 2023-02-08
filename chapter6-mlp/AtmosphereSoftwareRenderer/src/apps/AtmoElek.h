@@ -17,7 +17,7 @@ public:
     void init(RenderContext* target);
     void updateAndRender(RenderContext* target, float delta);
     
-    void setSunDirection(double angle);
+    void setSunDirection(double elevation_angle, double azimuth_angle = -90.0);
     void setCameraDir(double yaw, double pitch);
     void setCameraPosition(glm::highp_dvec3 new_position);
 

@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <stdint.h>
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm/glm.hpp>
 #include "Ray.h"
 #include <atmosphere\raytracer\Options.h>
 
@@ -21,7 +21,10 @@ public:
     bool m_use_fisheye;
 
 private:
-    glm::highp_mat4 m_cam_transform;
+    glm::highp_mat4 m_view;
+    glm::highp_mat4 m_inv_view;
+    glm::highp_mat4 m_proj;
+    glm::highp_mat4 m_inv_proj;
     glm::highp_dvec3 m_eye;
     glm::highp_dvec3 m_dir;
     Options m_options;

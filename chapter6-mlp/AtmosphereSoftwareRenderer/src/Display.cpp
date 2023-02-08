@@ -1,7 +1,7 @@
 #include "Display.h"
 #include <iostream>
 
-Display::Display(size_t width, size_t height, std::string title)
+Display::Display(size_t width, size_t height, std::string title, uint32_t window_sdl_flags)
     : m_framebuffer(nullptr),
       m_should_window_close(false)
 {
@@ -12,7 +12,7 @@ Display::Display(size_t width, size_t height, std::string title)
                                 SDL_WINDOWPOS_UNDEFINED, 
                                 width, 
                                 height, 
-                                0);
+                                window_sdl_flags);
 
     m_renderer      = SDL_CreateRenderer(m_window, -1, 0);
     m_display_image = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, width, height);

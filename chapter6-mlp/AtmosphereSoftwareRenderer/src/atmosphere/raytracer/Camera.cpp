@@ -1,6 +1,5 @@
 ﻿#include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/euler_angles.hpp>
 
 Camera::Camera(uint32_t width, uint32_t height, const glm::highp_dvec3 & eye, double fov, double pitch, double yaw, Options options)
     : m_width(width),
@@ -10,8 +9,9 @@ Camera::Camera(uint32_t width, uint32_t height, const glm::highp_dvec3 & eye, do
       m_use_fisheye(false),
       m_options(options)
 {
-    m_angle = glm::tan(glm::radians(m_fov / 2.0f));
-    
+    m_proj     = glm::perspectiveFov(glm::radians(m_fov), (double)width, (double)height, 0.1, 1000.0);
+    m_inv_proj = glm::inverse(m_proj);
+
     setPosition(eye);
     setDirection(yaw, pitch);
 }
@@ -32,20 +32,19 @@ Ray Camera::getPrimaryRay(double x, double y)
             double theta = std::acos(1.0 - z2);
             primary_ray.m_origin    = m_eye;
             primary_ray.m_direction = glm::highp_dvec3(sin(theta) * cos(phi), cos(theta), sin(theta) * sin(phi));
-            primary_ray.m_direction = glm::highp_dvec3(m_cam_transform * glm::highp_dvec4(primary_ray.m_direction, 0.0));
+            primary_ray.m_direction = glm::highp_dvec3(m_view * glm::highp_dvec4(primary_ray.m_direction, 0.0));
             primary_ray.m_direction = glm::normalize(primary_ray.m_direction);
             primary_ray.is_valid    = true;
         }
     }
     else
     {
-        double pixel_cam_x = (2.0f * ((x) / m_width) - 1.0f) * m_aspect_ratio * m_angle;
-        double pixel_cam_y = (1.0f - 2.0f * ((y) / m_height)) * m_angle;
+        glm::highp_dvec2 coord = { x / (double)m_width, y / (double)m_height };
+        coord = coord * 2.0 - 1.0; // -1 -> 1
 
+        glm::highp_dvec4 target = m_inv_proj * glm::highp_dvec4(coord.x, coord.y, 1, 1); // view space
         primary_ray.m_origin    = m_eye;
-        primary_ray.m_direction = glm::highp_dvec3(pixel_cam_x, pixel_cam_y, -1.0);
-        primary_ray.m_direction = glm::highp_dvec3(m_cam_transform * glm::highp_dvec4(primary_ray.m_direction, 0.0));
-        primary_ray.m_direction = glm::normalize(primary_ray.m_direction);
+        primary_ray.m_direction = glm::highp_dvec3(m_inv_view * glm::highp_dvec4(glm::normalize(glm::highp_dvec3(target) / target.w), 0.0)); // World Space
         primary_ray.is_valid    = true;
     }
 
@@ -57,16 +56,18 @@ void Camera::setDirection(double yaw, double pitch)
     auto _yaw   = glm::radians(yaw);
     auto _pitch = glm::radians(pitch);
 
-    m_dir   = glm::highp_dvec3(glm::cos(_yaw) * glm::cos(_pitch),
-                               glm::sin(_pitch),
-                               glm::sin(_yaw) * glm::cos(_pitch));
+    m_dir = glm::highp_dvec3(glm::cos(_yaw) * glm::cos(_pitch),
+                             glm::sin(_pitch),
+                             glm::sin(_yaw) * glm::cos(_pitch));
     m_dir = glm::normalize(m_dir);
 
-    m_cam_transform = glm::lookAt(m_eye, m_eye + m_dir, glm::highp_dvec3(0, -1, 0));
+    m_view = glm::lookAt(m_eye, m_eye + m_dir, glm::highp_dvec3(0, 1, 0));
+    m_inv_view = glm::inverse(m_view);
 }
 
 void Camera::setPosition(const glm::highp_dvec3& new_pos)
 {
     m_eye = (new_pos - glm::highp_dvec3(0.0f, m_options.PLANET_RADIUS + 1000.0f, 0.0f)) * m_options.ATMOSPHERE_PROPERTIES_SCALING_FACTOR;
-    m_cam_transform = glm::lookAt(m_eye, m_eye + m_dir, glm::highp_dvec3(0, -1, 0));
+    m_view = glm::lookAt(m_eye, m_eye + m_dir, glm::highp_dvec3(0, 1, 0));
+    m_inv_view = glm::inverse(m_view);
 }

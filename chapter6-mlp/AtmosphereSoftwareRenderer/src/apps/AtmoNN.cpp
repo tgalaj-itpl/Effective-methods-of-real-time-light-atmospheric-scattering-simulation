@@ -35,7 +35,7 @@ void AtmoNN::init(RenderContext* target)
 #ifdef _DEBUG
     m_num_threads = 1;
 #else
-    m_num_threads = std::thread::hardware_concurrency();
+    m_num_threads = std::thread::hardware_concurrency() - 1;
     std::cout << "num threads = " << m_num_threads << std::endl;
 #endif
 
@@ -63,9 +63,17 @@ void AtmoNN::updateAndRender(RenderContext* target, float delta)
     }
 }
 
-void AtmoNN::setSunDirection(double angle)
+void AtmoNN::setSunDirection(double elevation_angle, double azimuth_angle)
 {
-    m_atmosphere->setSunDirection(glm::highp_dvec3(0.0, -glm::cos(glm::radians(angle)), glm::sin(glm::radians(angle))));
+    float el = glm::radians(elevation_angle);
+    float az = glm::radians(azimuth_angle);
+
+    glm::highp_dvec3 direction;
+    direction.x = glm::sin(el) * glm::cos(az);
+    direction.y = glm::cos(el);
+    direction.z = glm::sin(el) * glm::sin(az);
+
+    m_atmosphere->setSunDirection(-direction);
 }
 
 void AtmoNN::setCameraDir(double yaw, double pitch)

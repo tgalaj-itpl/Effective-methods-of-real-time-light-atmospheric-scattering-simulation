@@ -31,8 +31,8 @@ struct Options
     double ATMOSPHERE_RADIUS       = PLANET_RADIUS + 100e3;
     double H_RAYLEIGH              = 8000.0;
     double H_MIE                   = 1200.0;
-    glm::highp_dvec3 BETA_RAYLEIGH = glm::highp_dvec3(3.8e-6f, 13.5e-6f, 33.1e-6f);
-    glm::highp_dvec3 BETA_MIE      = glm::highp_dvec3(21e-6f);
+    glm::highp_dvec3 BETA_RAYLEIGH = glm::highp_dvec3(3.8e-6, 13.5e-6, 33.1e-6);
+    glm::highp_dvec3 BETA_MIE      = glm::highp_dvec3(21e-6);
     #endif
 
     /* Mars */
